@@ -22,12 +22,12 @@ export default function App() {
           <Route path="/matches" element={<Matches />} />
           <Route path="/news" element={<News />} />
           <Route path="/stats" element={<Stats />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/admin" element={<Login />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/matches" element={<AdminMatches />} />
           <Route path="/admin/news" element={<AdminNews />} />
           <Route path="/admin/stats" element={<AdminStats />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
     </div>
