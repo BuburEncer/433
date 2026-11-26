@@ -17,7 +17,7 @@ export default function HomeScreen() {
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.logo}>4-2-3-1</Text>
+        <Text style={styles.logo}>4231</Text>
         <Ionicons name="search" size={24} color="white" />
       </View>
 
