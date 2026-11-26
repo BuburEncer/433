@@ -24,8 +24,8 @@ export default function Stats() {
       });
   }, []);
 
-  if (loading) return <p>Loading klasemen …</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (loading) return <><Navbar /><p>Loading klasemen …</p></>;
+  if (error) return <><Navbar /><p style={{ color: "red" }}>{error}</p></>;
 
   return (
     <div className="stats">

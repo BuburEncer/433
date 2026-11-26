@@ -24,8 +24,8 @@ export default function News() {
       });
   }, []);
 
-  if (loading) return <p>Loading berita …</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (loading) return <><Navbar /><p>Loading berita …</p></>;
+  if (error) return <><Navbar /><p style={{ color: "red" }}>{error}</p></>;
 
   return (
     <div className="news-list">

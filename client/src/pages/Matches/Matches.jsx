@@ -27,8 +27,8 @@ export default function Matches() {
   const scheduled = matches.filter((m) => m.status === "scheduled");
   const finished = matches.filter((m) => m.status === "finished");
 
-  if (loading) return <p className="loading">Memuat jadwal pertandingan …</p>;
-  if (error) return <p className="error">{error}</p>;
+  if (loading) return <><Navbar /><p className="loading">Memuat jadwal pertandingan …</p></>;
+  if (error) return <><Navbar /><p className="error">{error}</p></>;
 
   const renderMatch = (m) => (
     <div key={m.id} className="match-card">
