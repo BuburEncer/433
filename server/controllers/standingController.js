@@ -2,9 +2,12 @@ import { literal } from "sequelize";
 import { Standing, Team } from "../models/index.js";
 
 // `points` is a VIRTUAL attribute, so sort by the expression it is computed from.
+// Columns are table-qualified (Team is joined) and COALESCEd so a NULL never drops a team to the bottom.
+// Team name is the last key so tied teams keep a stable rank between requests.
 export const STANDINGS_ORDER = [
-  [literal("win * 3 + draw"), "DESC"],
+  [literal("COALESCE(`Standing`.`win`, 0) * 3 + COALESCE(`Standing`.`draw`, 0)"), "DESC"],
   ["win", "DESC"],
+  [Team, "name", "ASC"],
 ];
 
 export async function getStandings(req, res, next) {
