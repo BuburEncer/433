@@ -74,7 +74,7 @@ export default function AdminStats() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-bg">
       <Navbar admin />
       <div className="container mx-auto p-5">
         <h2 className="text-3xl font-semibold text-center mb-8">
@@ -87,7 +87,7 @@ export default function AdminStats() {
           className="space-y-6 mb-10 p-6 bg-white shadow-lg rounded-lg"
         >
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-muted">
               Nama Tim
             </label>
             <Select
@@ -121,7 +121,7 @@ export default function AdminStats() {
             { name: "loss", label: "Jumlah Kalah" },
           ].map(({ name, label }) => (
             <div key={name}>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-muted">
                 {label}
               </label>
               <input
@@ -137,14 +137,14 @@ export default function AdminStats() {
                   });
                 }}
                 required
-                className="mt-2 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="mt-2 w-full px-4 py-2 border border-input-border rounded-lg focus:ring-2 focus:ring-link"
               />
             </div>
           ))}
 
           <button
             type="submit"
-            className="w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full py-3 bg-navy text-white font-semibold rounded-lg hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-navy"
           >
             Tambah Statistik
           </button>
@@ -164,7 +164,7 @@ export default function AdminStats() {
                   >
                     <div>
                       <h4 className="text-xl font-semibold">{team.name}</h4>
-                      <p className="text-gray-600">
+                      <p className="text-muted">
                         Pertandingan: {s.played} | Menang: {s.win} | Seri:{" "}
                         {s.draw} | Kalah: {s.loss} | Poin: {s.points}
                       </p>
@@ -181,13 +181,13 @@ export default function AdminStats() {
                             points: s.points,
                           });
                         }}
-                        className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                        className="bg-muted text-white px-4 py-2 rounded-lg hover:bg-muted/90 focus:outline-none focus:ring-2 focus:ring-muted"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => deleteStat(s.id)}
-                        className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        className="bg-danger text-white px-4 py-2 rounded-lg hover:bg-danger/90 focus:outline-none focus:ring-2 focus:ring-danger"
                       >
                         Hapus
                       </button>
@@ -217,7 +217,7 @@ export default function AdminStats() {
                         className="space-y-4 mt-4 w-full"
                       >
                         <div>
-                          <label className="block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium text-muted">
                             Pertandingan
                           </label>
                           <input
@@ -231,12 +231,12 @@ export default function AdminStats() {
                             }
                             min={0}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-2 border border-input-border rounded-lg focus:ring-2 focus:ring-link"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium text-muted">
                             Menang
                           </label>
                           <input
@@ -247,12 +247,12 @@ export default function AdminStats() {
                             }
                             min={0}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-2 border border-input-border rounded-lg focus:ring-2 focus:ring-link"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium text-muted">
                             Seri
                           </label>
                           <input
@@ -263,12 +263,12 @@ export default function AdminStats() {
                             }
                             min={0}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-2 border border-input-border rounded-lg focus:ring-2 focus:ring-link"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700">
+                          <label className="block text-sm font-medium text-muted">
                             Kalah
                           </label>
                           <input
@@ -279,21 +279,21 @@ export default function AdminStats() {
                             }
                             min={0}
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                            className="w-full px-4 py-2 border border-input-border rounded-lg focus:ring-2 focus:ring-link"
                           />
                         </div>
 
                         <div className="flex space-x-3">
                           <button
                             type="submit"
-                            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            className="bg-navy text-white px-4 py-2 rounded-lg hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-navy"
                           >
                             Simpan
                           </button>
                           <button
                             type="button"
                             onClick={() => setEditingId(null)}
-                            className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                            className="bg-muted text-white px-4 py-2 rounded-lg hover:bg-muted/90 focus:outline-none focus:ring-2 focus:ring-muted"
                           >
                             Batal
                           </button>
@@ -305,7 +305,7 @@ export default function AdminStats() {
               })}
             </ul>
           ) : (
-            <p className="text-center text-gray-600">
+            <p className="text-center text-muted">
               Belum ada data statistik.
             </p>
           )}

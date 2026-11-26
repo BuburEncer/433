@@ -119,7 +119,7 @@ export default function AdminMatches() {
   const finishedMatches = matches.filter((m) => m.status === "finished");
 
   return (
-    <div className="admin-matches bg-gray-100 min-h-screen">
+    <div className="admin-matches bg-bg min-h-screen">
       <Navbar admin />
       <div className="container mx-auto p-6">
         <h3 className="text-3xl font-semibold mb-6">Tambah Pertandingan</h3>
@@ -200,7 +200,7 @@ export default function AdminMatches() {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white p-2 mt-4 rounded-lg hover:bg-blue-700"
+            className="w-full bg-link text-white p-2 mt-4 rounded-lg hover:bg-link/90"
           >
             Simpan Pertandingan
           </button>
@@ -255,7 +255,7 @@ export default function AdminMatches() {
                 <div className="flex space-x-4">
                   <button
                     onClick={() => deleteMatch(m.id)}
-                    className="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700"
+                    className="bg-danger text-white p-2 rounded-lg hover:bg-danger/90"
                   >
                     Hapus
                   </button>
@@ -265,7 +265,7 @@ export default function AdminMatches() {
                       onClick={() =>
                         setShowEditForm({ ...showEditForm, [m.id]: true })
                       }
-                      className="bg-yellow-500 text-white p-2 rounded-lg hover:bg-yellow-600"
+                      className="bg-muted text-white p-2 rounded-lg hover:bg-muted/90"
                     >
                       Edit Skor
                     </button>
@@ -305,7 +305,7 @@ export default function AdminMatches() {
                       />
                       <button
                         onClick={() => updateMatch(m.id)}
-                        className="bg-green-600 text-white p-2 rounded-lg hover:bg-green-700"
+                        className="bg-navy text-white p-2 rounded-lg hover:bg-navy/90"
                       >
                         Simpan Skor
                       </button>
@@ -353,7 +353,7 @@ export default function AdminMatches() {
 
               <button
                 onClick={() => deleteMatch(m.id)}
-                className="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700"
+                className="bg-danger text-white p-2 rounded-lg hover:bg-danger/90"
               >
                 Hapus
               </button>

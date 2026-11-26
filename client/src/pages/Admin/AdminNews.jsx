@@ -50,7 +50,7 @@ export default function AdminNews() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-bg min-h-screen">
       <Navbar admin />
       <div className="container mx-auto p-6">
         <h2 className="text-3xl font-semibold mb-6">Kelola Berita</h2>
@@ -65,7 +65,7 @@ export default function AdminNews() {
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             required
-            className="w-full p-3 border border-gray-300 rounded-md"
+            className="w-full p-3 border border-input-border rounded-md"
           />
           <textarea
             placeholder="Caption berita..."
@@ -73,18 +73,18 @@ export default function AdminNews() {
             onChange={(e) => setForm({ ...form, caption: e.target.value })}
             rows={5}
             required
-            className="w-full p-3 border border-gray-300 rounded-md"
+            className="w-full p-3 border border-input-border rounded-md"
           />
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
             required
-            className="w-full p-3 border border-gray-300 rounded-md"
+            className="w-full p-3 border border-input-border rounded-md"
           />
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700"
+            className="w-full bg-link text-white p-3 rounded-lg hover:bg-link/90"
           >
             Tambah Berita
           </button>
@@ -96,7 +96,7 @@ export default function AdminNews() {
           {news.map((n) => (
             <li
               key={n.id}
-              className="bg-white p-6 rounded-lg shadow-md space-y-4 border-b border-gray-300"
+              className="bg-white p-6 rounded-lg shadow-md space-y-4 border-b border-border"
             >
               {n.image_url && (
                 <img
@@ -106,11 +106,11 @@ export default function AdminNews() {
                 />
               )}
               <h3 className="text-xl font-semibold">{n.title}</h3>
-              <p className="text-gray-700">{n.caption}</p>{" "}
+              <p className="text-muted">{n.caption}</p>{" "}
               {/* Caption tampilkan */}
               <button
                 onClick={() => deleteNews(n.id)}
-                className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+                className="mt-4 bg-danger text-white px-4 py-2 rounded-lg hover:bg-danger/90"
               >
                 Hapus
               </button>
