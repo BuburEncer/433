@@ -25,6 +25,7 @@ Semua warna dan ukuran ditulis sekali sebagai CSS variable di `client/src/index.
 | `--color-bg` | `#f5f6fa` | Latar halaman |
 | `--color-surface` | `#ffffff` | Kartu |
 | `--color-border` | `#e3e6ee` | Garis kartu dan pemisah baris |
+| `--color-input-border` | `#7c8599` | Garis input form (kontras 3.70:1 terhadap putih) |
 | `--color-text` | `#111827` | Teks utama |
 | `--color-muted` | `#5b6475` | Tanggal, caption, label kecil |
 | `--color-muted-on-navy` | `#b4bbe0` | Teks sekunder di atas navy |

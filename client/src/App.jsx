@@ -10,12 +10,10 @@ import AdminMatches from "./pages/Admin/AdminMatches.jsx";
 import AdminNews from "./pages/Admin/AdminNews.jsx";
 import AdminStats from "./pages/Admin/AdminStats.jsx";
 
-import "./App.css";
 
 export default function App() {
   return (
-    <div className="app">
-      <main>
+    <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/matches" element={<Matches />} />
@@ -28,7 +26,6 @@ export default function App() {
           <Route path="/admin/stats" element={<AdminStats />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </main>
-    </div>
+    </main>
   );
 }
