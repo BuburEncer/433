@@ -17,7 +17,10 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
         credentials: 'include',
       });
-      if (!res.ok) throw new Error('Email atau password salah');
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.msg || 'Login gagal, coba lagi');
+      }
       navigate('/admin/dashboard');
     } catch (err) {
       setError(err.message);
@@ -25,7 +28,7 @@ export default function Login() {
   };
 
   return (
-    <main className="min-h-screen grid place-items-center bg-navy px-4">
+    <div className="min-h-screen grid place-items-center bg-navy px-4">
       <form onSubmit={login} className="card w-full max-w-sm p-8 space-y-4">
         <h1 className="text-2xl font-extrabold">Login Admin</h1>
         {error && (
@@ -41,7 +44,7 @@ export default function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 w-full rounded-lg border border-input-border px-3 py-2"
+            className="mt-1 w-full rounded-control border border-input-border px-3 py-2"
           />
         </label>
         <label className="block">
@@ -52,13 +55,13 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mt-1 w-full rounded-lg border border-input-border px-3 py-2"
+            className="mt-1 w-full rounded-control border border-input-border px-3 py-2"
           />
         </label>
-        <button type="submit" className="w-full rounded-lg bg-navy py-3 font-bold text-white hover:bg-navy/90">
+        <button type="submit" className="w-full rounded-control bg-navy py-3 font-bold text-white hover:bg-navy/90">
           Login
         </button>
       </form>
-    </main>
+    </div>
   );
 }
