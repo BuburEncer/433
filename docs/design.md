@@ -58,7 +58,7 @@ Kontras sudah dihitung dengan rumus WCAG. Pasangan dengan kontras terendah adala
 
 ### Navbar
 
-Latar navy. Logo bola berbintang (`client/public/logo.svg`, juga dipakai sebagai favicon) dan teks "4231" berwarna cyan, link berwarna putih. Link halaman aktif diberi garis bawah cyan, memakai `NavLink` dari react-router. Menu HP tetap memakai tombol hamburger yang sudah ada.
+Latar navy. Logonya bola putih berbintang navy dengan lingkaran cyan di atas kotak navy (`client/public/logo.svg`, juga dipakai sebagai favicon). Teks "4231" berwarna cyan dan link berwarna putih. Link halaman aktif diberi garis bawah cyan, memakai `NavLink` dari react-router. Menu HP tetap memakai tombol hamburger yang sudah ada.
 
 ### Baris skor (halaman Matches)
 
