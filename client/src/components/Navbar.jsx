@@ -36,8 +36,8 @@ export default function Navbar({ admin = false }) {
     <nav className="navbar">
       <div className="navbarInner">
         <div className="navbarLogo">
-          <img src="/4-2-3-1 Logo.png" alt="Logo 4-2-3-1" className="logoImage" />
-          <div className="navbarText">4-2-3-1</div>
+          <img src="/logo.svg" alt="" className="logoImage" />
+          <div className="navbarText">4231</div>
         </div>
 
         <button

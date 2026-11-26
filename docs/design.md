@@ -1,4 +1,4 @@
-# Desain UI: tema baru 4-2-3-1
+# Desain UI: tema baru 4231
 
 Dokumen ini mengatur tampilan baru client (`client/`). Backend tidak berubah.
 
@@ -58,7 +58,7 @@ Kontras sudah dihitung dengan rumus WCAG. Pasangan dengan kontras terendah adala
 
 ### Navbar
 
-Latar navy. Teks logo "4-2-3-1" berwarna cyan, link berwarna putih. Link halaman aktif diberi garis bawah cyan, memakai `NavLink` dari react-router. Menu HP tetap memakai tombol hamburger yang sudah ada.
+Latar navy. Logo bola berbintang (`client/public/logo.svg`, juga dipakai sebagai favicon) dan teks "4231" berwarna cyan, link berwarna putih. Link halaman aktif diberi garis bawah cyan, memakai `NavLink` dari react-router. Menu HP tetap memakai tombol hamburger yang sudah ada.
 
 ### Baris skor (halaman Matches)
 
@@ -83,7 +83,7 @@ Halaman admin tetap memakai Tailwind. Warna biru, abu-abu, dan merah bawaan Tail
 ## Yang tidak berubah
 
 - Struktur halaman, route, dan alur data.
-- Logo klub dan `4-2-3-1 Logo.png`.
+- Logo klub.
 - Mode gelap. Bisa ditambah nanti karena semua warna sudah berupa token.
 
 ## Pengujian

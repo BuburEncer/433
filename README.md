@@ -1,4 +1,4 @@
-# 4-2-3-1
+# 4231
 
 A news, fixtures and standings site for the UEFA Champions League. Visitors can read news, check upcoming matches and results, and see the league phase table. Admins log in to add, edit and delete that data.
 
