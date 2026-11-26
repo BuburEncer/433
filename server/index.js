@@ -10,9 +10,6 @@ import db from "./config/Database.js";
 import routes from "./routes/index.js";
 import errorHandler from "./middleware/errorHandler.js";
 import authRoutes from "./routes/auth.js";
-import teamRoutes from "./routes/team.js";
-import matchRoutes from "./routes/matches.js";
-import standingsRouter from './routes/standings.js';
 
 dotenv.config();
 
@@ -48,9 +45,6 @@ app.use(
 );
 
 app.use("/api/admin", authRoutes);
-app.use("/api/teams", teamRoutes);
-app.use("/api/matches", matchRoutes);
-app.use('/api/standings', standingsRouter);
 
 // sinkronisasi tabel session
 store.sync();
