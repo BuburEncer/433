@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
-import { API, SERVER_URL } from "../../api";
+import { API, SERVER_URL, adminFetch } from "../../api";
 
 export default function AdminNews() {
   const [news, setNews] = useState([]);
@@ -28,22 +28,24 @@ export default function AdminNews() {
     formData.append("caption", form.caption);
     formData.append("image", form.image);
 
-    await fetch(`${API}/news`, {
-      method: "POST",
-      credentials: "include",
-      body: formData,
-    });
+    try {
+      await adminFetch("/news", { method: "POST", body: formData });
+    } catch (err) {
+      alert(err.message);
+      return;
+    }
 
     setForm({ title: "", caption: "", image: null });
-    e.target.reset(); // reset form tampilan
+    e.target.reset();
     fetchNews();
   };
 
   const deleteNews = async (id) => {
-    await fetch(`${API}/news/${id}`, {
-      method: "DELETE",
-      credentials: "include",
-    });
+    try {
+      await adminFetch(`/news/${id}`, { method: "DELETE" });
+    } catch (err) {
+      alert(err.message);
+    }
     fetchNews();
   };
 

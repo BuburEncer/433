@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import Navbar from "../../components/Navbar";
-import { API } from "../../api";
+import { API, adminFetch } from "../../api";
 
 export default function AdminStats() {
   const [stats, setStats] = useState([]);
@@ -43,12 +43,16 @@ export default function AdminStats() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch(`${API}/standings`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(form),
-    });
+    try {
+      await adminFetch("/standings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+    } catch (err) {
+      alert(err.message);
+      return;
+    }
     fetchStats();
     setForm({
       teamId: "",
@@ -61,10 +65,11 @@ export default function AdminStats() {
   };
 
   const deleteStat = async (id) => {
-    await fetch(`${API}/standings/${id}`, {
-      method: "DELETE",
-      credentials: "include",
-    });
+    try {
+      await adminFetch(`/standings/${id}`, { method: "DELETE" });
+    } catch (err) {
+      alert(err.message);
+    }
     fetchStats();
   };
 
@@ -191,21 +196,21 @@ export default function AdminStats() {
                       <form
                         onSubmit={async (e) => {
                           e.preventDefault();
-                          await fetch(
-                            `${API}/standings/${s.id}`,
-                            {
+                          try {
+                            await adminFetch(`/standings/${s.id}`, {
                               method: "PUT",
                               headers: { "Content-Type": "application/json" },
-                              credentials: "include",
                               body: JSON.stringify({
                                 played: Number(editForm.played),
                                 win: Number(editForm.win),
                                 draw: Number(editForm.draw),
                                 loss: Number(editForm.loss),
-                                points: Number(editForm.points),
                               }),
-                            }
-                          );
+                            });
+                          } catch (err) {
+                            alert(err.message);
+                            return;
+                          }
                           setEditingId(null);
                           fetchStats();
                         }}

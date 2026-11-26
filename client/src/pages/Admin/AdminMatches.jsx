@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
 import Navbar from "../../components/Navbar";
-import { API } from "../../api";
+import { API, adminFetch } from "../../api";
 
 export default function AdminMatches() {
   const [matches, setMatches] = useState([]);
@@ -62,24 +62,26 @@ export default function AdminMatches() {
       payload.status = "finished";
     }
 
-    const res = await fetch(`${API}/matches`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(payload),
-    });
-
-    if (res.ok) {
-      setForm({
-        home_team_id: "",
-        away_team_id: "",
-        match_date: "",
-        home_score: "",
-        away_score: "",
+    try {
+      await adminFetch("/matches", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
-      setFormKey(Date.now()); // ini akan reset komponen Select
-      fetchMatches();
+    } catch (err) {
+      alert(err.message);
+      return;
     }
+
+    setForm({
+      home_team_id: "",
+      away_team_id: "",
+      match_date: "",
+      home_score: "",
+      away_score: "",
+    });
+    setFormKey(Date.now()); // ini akan reset komponen Select
+    fetchMatches();
   };
 
   const updateMatch = async (id) => {
@@ -89,22 +91,27 @@ export default function AdminMatches() {
       status: "finished",
     };
 
-    await fetch(`${API}/matches/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(updated),
-    });
+    try {
+      await adminFetch(`/matches/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updated),
+      });
+    } catch (err) {
+      alert(err.message);
+      return;
+    }
 
     setShowEditForm({ ...showEditForm, [id]: false });
     fetchMatches();
   };
 
   const deleteMatch = async (id) => {
-    await fetch(`${API}/matches/${id}`, {
-      method: "DELETE",
-      credentials: "include",
-    });
+    try {
+      await adminFetch(`/matches/${id}`, { method: "DELETE" });
+    } catch (err) {
+      alert(err.message);
+    }
     fetchMatches();
   };
 
