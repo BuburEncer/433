@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { FiMenu, FiX } from "react-icons/fi";
 import "./Navbar.css";
 
 const PUBLIC_LINKS = [
@@ -17,6 +19,8 @@ const ADMIN_LINKS = [
 ];
 
 export default function Navbar({ admin = false }) {
+  const [open, setOpen] = useState(false);
+
   return (
     <nav className="navbar">
       <div className="navbarInner">
@@ -25,10 +29,21 @@ export default function Navbar({ admin = false }) {
           <div className="navbarText">4-2-3-1</div>
         </div>
 
-        <ul className="navbarMenu">
+        <button
+          type="button"
+          className="hamburger"
+          aria-label={open ? "Tutup menu" : "Buka menu"}
+          aria-expanded={open}
+          aria-controls="navbar-menu"
+          onClick={() => setOpen((o) => !o)}
+        >
+          {open ? <FiX /> : <FiMenu />}
+        </button>
+
+        <ul id="navbar-menu" className={open ? "navbarMenu open" : "navbarMenu"}>
           {(admin ? ADMIN_LINKS : PUBLIC_LINKS).map(([to, label]) => (
             <li key={label}>
-              <Link to={to} className="navbarLink">
+              <Link to={to} className="navbarLink" onClick={() => setOpen(false)}>
                 {label}
               </Link>
             </li>
