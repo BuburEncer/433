@@ -126,7 +126,7 @@ export default function AdminMatches() {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-6 rounded-lg shadow-md"
+          className="bg-surface border border-border p-6 rounded-card"
         >
           <label className="block text-lg font-medium mb-2">
             Tim Tuan Rumah
@@ -164,7 +164,7 @@ export default function AdminMatches() {
             value={form.match_date}
             onChange={(e) => setForm({ ...form, match_date: e.target.value })}
             required
-            className="w-full p-2 border rounded-md"
+            className="w-full p-2 border rounded-control border-input-border"
           />
 
           {/* Tampilkan input skor jika tanggal sudah lewat */}
@@ -180,7 +180,7 @@ export default function AdminMatches() {
                   setForm({ ...form, home_score: e.target.value })
                 }
                 required
-                className="w-full p-2 border rounded-md"
+                className="w-full p-2 border rounded-control border-input-border"
               />
 
               <label className="block text-lg font-medium mt-4 mb-2">
@@ -193,14 +193,14 @@ export default function AdminMatches() {
                   setForm({ ...form, away_score: e.target.value })
                 }
                 required
-                className="w-full p-2 border rounded-md"
+                className="w-full p-2 border rounded-control border-input-border"
               />
             </>
           )}
 
           <button
             type="submit"
-            className="w-full bg-link text-white p-2 mt-4 rounded-lg hover:bg-link/90"
+            className="w-full bg-link text-white p-2 mt-4 rounded-control hover:bg-link/90"
           >
             Simpan Pertandingan
           </button>
@@ -216,7 +216,7 @@ export default function AdminMatches() {
             return (
               <div
                 key={m.id}
-                className="bg-white p-4 rounded-lg shadow-md mb-4 flex justify-between items-center"
+                className="bg-surface border border-border p-4 rounded-card mb-4 flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center"
               >
                 <div className="flex items-center">
                   <img
@@ -229,7 +229,7 @@ export default function AdminMatches() {
                   </span>
                 </div>
 
-                <span className="text-xl font-bold">
+                <span className="text-base sm:text-xl font-bold text-center">
                   {isPast
                     ? "Waktu Lewat - Perlu Update Skor"
                     : new Date(m.match_date).toLocaleString("id-ID", {
@@ -255,7 +255,7 @@ export default function AdminMatches() {
                 <div className="flex space-x-4">
                   <button
                     onClick={() => deleteMatch(m.id)}
-                    className="bg-danger text-white p-2 rounded-lg hover:bg-danger/90"
+                    className="bg-danger text-white p-2 rounded-control hover:bg-danger/90"
                   >
                     Hapus
                   </button>
@@ -265,7 +265,7 @@ export default function AdminMatches() {
                       onClick={() =>
                         setShowEditForm({ ...showEditForm, [m.id]: true })
                       }
-                      className="bg-muted text-white p-2 rounded-lg hover:bg-muted/90"
+                      className="border border-link text-link bg-surface hover:bg-bg p-2 rounded-control"
                     >
                       Edit Skor
                     </button>
@@ -286,7 +286,7 @@ export default function AdminMatches() {
                             },
                           })
                         }
-                        className="p-2 border rounded-md"
+                        className="p-2 border rounded-control border-input-border"
                       />
                       <input
                         type="number"
@@ -301,11 +301,11 @@ export default function AdminMatches() {
                             },
                           })
                         }
-                        className="p-2 border rounded-md"
+                        className="p-2 border rounded-control border-input-border"
                       />
                       <button
                         onClick={() => updateMatch(m.id)}
-                        className="bg-navy text-white p-2 rounded-lg hover:bg-navy/90"
+                        className="bg-navy text-white p-2 rounded-control hover:bg-navy/90"
                       >
                         Simpan Skor
                       </button>
@@ -323,7 +323,7 @@ export default function AdminMatches() {
           {finishedMatches.map((m) => (
             <div
               key={m.id}
-              className="bg-white p-4 rounded-lg shadow-md mb-4 flex justify-between items-center"
+              className="bg-surface border border-border p-4 rounded-card mb-4 flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center"
             >
               <div className="flex items-center">
                 <img
@@ -336,7 +336,7 @@ export default function AdminMatches() {
                 </span>
               </div>
 
-              <span className="text-xl font-bold">
+              <span className="text-base sm:text-xl font-bold text-center">
                 {m.home_score} - {m.away_score}
               </span>
 
@@ -353,7 +353,7 @@ export default function AdminMatches() {
 
               <button
                 onClick={() => deleteMatch(m.id)}
-                className="bg-danger text-white p-2 rounded-lg hover:bg-danger/90"
+                className="bg-danger text-white p-2 rounded-control hover:bg-danger/90"
               >
                 Hapus
               </button>

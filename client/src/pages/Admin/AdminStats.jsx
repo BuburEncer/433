@@ -84,7 +84,7 @@ export default function AdminStats() {
         {/* Form Input Stats */}
         <form
           onSubmit={handleSubmit}
-          className="space-y-6 mb-10 p-6 bg-white shadow-lg rounded-lg"
+          className="space-y-6 mb-10 p-6 bg-surface border border-border rounded-card"
         >
           <div>
             <label className="block text-sm font-medium text-muted">
@@ -137,14 +137,14 @@ export default function AdminStats() {
                   });
                 }}
                 required
-                className="mt-2 w-full px-4 py-2 border border-input-border rounded-lg focus:ring-2 focus:ring-link"
+                className="mt-2 w-full px-4 py-2 border border-input-border rounded-control"
               />
             </div>
           ))}
 
           <button
             type="submit"
-            className="w-full py-3 bg-navy text-white font-semibold rounded-lg hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-navy"
+            className="w-full py-3 bg-navy text-white font-semibold rounded-control hover:bg-navy/90"
           >
             Tambah Statistik
           </button>
@@ -160,7 +160,7 @@ export default function AdminStats() {
                 return (
                   <li
                     key={s.id}
-                    className="bg-white p-5 rounded-lg shadow-md flex justify-between items-center"
+                    className="bg-surface border border-border p-5 rounded-card flex justify-between items-center"
                   >
                     <div>
                       <h4 className="text-xl font-semibold">{team.name}</h4>
@@ -181,13 +181,13 @@ export default function AdminStats() {
                             points: s.points,
                           });
                         }}
-                        className="bg-muted text-white px-4 py-2 rounded-lg hover:bg-muted/90 focus:outline-none focus:ring-2 focus:ring-muted"
+                        className="border border-link text-link bg-surface hover:bg-bg px-4 py-2 rounded-control"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => deleteStat(s.id)}
-                        className="bg-danger text-white px-4 py-2 rounded-lg hover:bg-danger/90 focus:outline-none focus:ring-2 focus:ring-danger"
+                        className="bg-danger text-white px-4 py-2 rounded-control hover:bg-danger/90"
                       >
                         Hapus
                       </button>
@@ -231,7 +231,7 @@ export default function AdminStats() {
                             }
                             min={0}
                             required
-                            className="w-full px-4 py-2 border border-input-border rounded-lg focus:ring-2 focus:ring-link"
+                            className="w-full px-4 py-2 border border-input-border rounded-control"
                           />
                         </div>
 
@@ -247,7 +247,7 @@ export default function AdminStats() {
                             }
                             min={0}
                             required
-                            className="w-full px-4 py-2 border border-input-border rounded-lg focus:ring-2 focus:ring-link"
+                            className="w-full px-4 py-2 border border-input-border rounded-control"
                           />
                         </div>
 
@@ -263,7 +263,7 @@ export default function AdminStats() {
                             }
                             min={0}
                             required
-                            className="w-full px-4 py-2 border border-input-border rounded-lg focus:ring-2 focus:ring-link"
+                            className="w-full px-4 py-2 border border-input-border rounded-control"
                           />
                         </div>
 
@@ -279,21 +279,21 @@ export default function AdminStats() {
                             }
                             min={0}
                             required
-                            className="w-full px-4 py-2 border border-input-border rounded-lg focus:ring-2 focus:ring-link"
+                            className="w-full px-4 py-2 border border-input-border rounded-control"
                           />
                         </div>
 
                         <div className="flex space-x-3">
                           <button
                             type="submit"
-                            className="bg-navy text-white px-4 py-2 rounded-lg hover:bg-navy/90 focus:outline-none focus:ring-2 focus:ring-navy"
+                            className="bg-navy text-white px-4 py-2 rounded-control hover:bg-navy/90"
                           >
                             Simpan
                           </button>
                           <button
                             type="button"
                             onClick={() => setEditingId(null)}
-                            className="bg-muted text-white px-4 py-2 rounded-lg hover:bg-muted/90 focus:outline-none focus:ring-2 focus:ring-muted"
+                            className="text-muted px-4 py-2 rounded-control hover:bg-bg hover:text-text"
                           >
                             Batal
                           </button>
