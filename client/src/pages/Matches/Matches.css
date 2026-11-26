@@ -1,7 +1,3 @@
-.page-narrow {
-  max-width: 880px;
-}
-
 .tabs {
   display: flex;
   gap: 8px;
@@ -22,7 +18,7 @@
 .tab[aria-selected="true"] {
   background: var(--color-navy);
   border-color: var(--color-navy);
-  color: #ffffff;
+  color: var(--color-on-navy);
 }
 
 .match-list {

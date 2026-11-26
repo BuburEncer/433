@@ -45,7 +45,7 @@
 .navbarLink {
   display: inline-block;
   padding: 8px 0;
-  color: #ffffff;
+  color: var(--color-on-navy);
   font-size: 16px;
   font-weight: 600;
   border-bottom: 2px solid transparent;
@@ -76,7 +76,7 @@
   border: none;
   padding: 8px;
   cursor: pointer;
-  color: #ffffff;
+  color: var(--color-on-navy);
   font-size: 28px;
   line-height: 0;
 }
@@ -96,7 +96,7 @@
     align-items: stretch;
     gap: 0;
     background-color: var(--color-navy);
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid color-mix(in srgb, var(--color-on-navy) 12%, transparent);
   }
 
   .navbarMenu.open {
@@ -108,12 +108,12 @@
     width: 100%;
     padding: 14px 16px;
     text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-on-navy) 8%, transparent);
     border-left: 3px solid transparent;
   }
 
   .navbarLink.active {
-    border-bottom-color: rgba(255, 255, 255, 0.08);
+    border-bottom-color: color-mix(in srgb, var(--color-on-navy) 8%, transparent);
     border-left-color: var(--color-accent);
   }
 }

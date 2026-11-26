@@ -1,6 +1,6 @@
 .hero {
   background-color: var(--color-navy);
-  color: #ffffff;
+  color: var(--color-on-navy);
 }
 
 .hero-inner {
@@ -26,14 +26,14 @@
 .button-accent {
   display: inline-block;
   padding: 12px 24px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-control);
   background-color: var(--color-accent);
   color: var(--color-navy);
   font-weight: 800;
 }
 
 .button-accent:hover {
-  background-color: #ffffff;
+  background-color: var(--color-surface);
 }
 
 .shortcuts {
@@ -54,7 +54,7 @@
 
 .shortcut:hover {
   border-color: var(--color-link);
-  box-shadow: 0 4px 12px rgba(11, 16, 64, 0.08);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-navy) 8%, transparent);
 }
 
 .shortcut strong {
@@ -72,7 +72,7 @@
   }
 
   .hero h1 {
-    font-size: 28px;
+    font-size: 24px;
   }
 
   .shortcuts {

@@ -28,21 +28,25 @@ Semua warna dan ukuran ditulis sekali sebagai CSS variable di `client/src/index.
 | `--color-input-border` | `#7c8599` | Garis input form (kontras 3.70:1 terhadap putih) |
 | `--color-text` | `#111827` | Teks utama |
 | `--color-muted` | `#5b6475` | Tanggal, caption, label kecil |
+| `--color-on-navy` | `#ffffff` | Teks utama di atas navy |
 | `--color-muted-on-navy` | `#b4bbe0` | Teks sekunder di atas navy |
+| `--color-zebra` | `#fafbfd` | Baris selang-seling tabel klasemen |
 | `--color-link` | `#2536c9` | Link dan tombol sekunder |
 | `--color-danger` | `#c81e3a` | Tombol hapus, pesan error |
+
+Garis fokus keyboard memakai `--color-link` (8.57:1 di atas putih); cyan hanya dipakai di atas navy karena kontrasnya terhadap putih cuma 1.77:1.
 
 Kontras sudah dihitung dengan rumus WCAG. Pasangan dengan kontras terendah adalah teks `--color-muted` di atas `--color-bg` (5.52:1), dan itu masih di atas batas AA (4.5:1). Teks putih di atas navy 18.07:1, cyan di atas navy 10.20:1.
 
 ### Tipografi
 
-- Font: Manrope dari Google Fonts, berat 400, 600, dan 800. Fallback `system-ui, sans-serif`.
+- Font: Manrope dari Google Fonts, berat 400 sampai 800 (halaman admin memakai 500 dan 700). Fallback `system-ui, sans-serif`.
 - Ukuran: 14px untuk label, 16px untuk teks, 20px untuk judul kartu, 28px untuk judul halaman, 40px untuk judul hero (24px di HP).
 - Judul memakai berat 800, teks biasa 400.
 
 ### Bentuk dan jarak
 
-- Radius: 8px untuk tombol dan input, 12px untuk kartu.
+- Radius: 8px untuk tombol dan input (`--radius-control`), 12px untuk kartu (`--radius-card`). Nama `--radius-sm` dan `--radius-md` tidak dipakai karena bentrok dengan variabel bawaan Tailwind.
 - Kartu: latar putih, garis 1px `--color-border`, tanpa bayangan tebal. Bayangan tipis hanya muncul saat hover.
 - Jarak memakai kelipatan 4px: 8, 12, 16, 24, 32.
 - Lebar konten maksimal 1200px, dengan padding samping 16px di HP.
