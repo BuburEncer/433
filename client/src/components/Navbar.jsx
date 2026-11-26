@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
+import { adminFetch } from "../api";
 import "./Navbar.css";
 
 const PUBLIC_LINKS = [
@@ -15,11 +16,21 @@ const ADMIN_LINKS = [
   ["/admin/matches", "Admin Matches"],
   ["/admin/news", "Admin News"],
   ["/admin/stats", "Admin Stats"],
-  ["/", "Exit Admin"],
 ];
 
 export default function Navbar({ admin = false }) {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    setOpen(false);
+    try {
+      await adminFetch("/admin/logout", { method: "DELETE" });
+      navigate("/");
+    } catch (err) {
+      alert(err.message);
+    }
+  };
 
   return (
     <nav className="navbar">
@@ -48,6 +59,13 @@ export default function Navbar({ admin = false }) {
               </Link>
             </li>
           ))}
+          {admin && (
+            <li>
+              <button type="button" className="navbarLink navbarButton" onClick={logout}>
+                Exit Admin
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

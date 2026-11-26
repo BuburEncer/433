@@ -82,6 +82,13 @@
   width: 100%;
 }
 
+.navbarButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
 /* Hamburger */
 .hamburger {
   display: none;
