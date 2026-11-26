@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import "./News.css";
 import Navbar from "../../components/Navbar";
-import { API, SERVER_URL } from "../../api";
+import NewsList from "../../components/NewsList";
+import { API } from "../../api";
 
 export default function News() {
   const [news, setNews] = useState([]);
@@ -9,43 +9,29 @@ export default function News() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${API}/news`, { credentials: "include" })
+    fetch(`${API}/news`)
       .then((res) => {
         if (!res.ok) throw new Error("Gagal memuat berita");
         return res.json();
       })
-      .then((data) => {
-        setNews(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+      .then(setNews)
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <><Navbar /><p>Loading berita …</p></>;
-  if (error) return <><Navbar /><p style={{ color: "red" }}>{error}</p></>;
-
   return (
-    <div className="news-list">
+    <>
       <Navbar />
-      <h2>Berita Terkini</h2>
-      {news.map((n) => (
-        <div key={n.id} className="news-card">
-          {n.image_url && (
-            <img
-              src={`${SERVER_URL}${n.image_url}`}
-              alt={n.title}
-            />
-          )}
-          <div className="news-content">
-            <h3>{n.title}</h3>
-            <p>{n.caption}</p>
-            <small>{new Date(n.published_at).toLocaleString()}</small>
-          </div>
-        </div>
-      ))}
-    </div>
+      <div className="page">
+        <h1 className="page-title">Berita</h1>
+        {loading ? (
+          <p className="status">Memuat berita…</p>
+        ) : error ? (
+          <p className="status status-error">{error}</p>
+        ) : (
+          <NewsList items={news} showCaption />
+        )}
+      </div>
+    </>
   );
 }

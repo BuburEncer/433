@@ -1,104 +1,57 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-import { API, SERVER_URL } from "../../api";
+import NewsList from "../../components/NewsList";
+import { API } from "../../api";
 import "./Home.css";
+
+const SHORTCUTS = [
+  ["/news", "Berita", "Kabar terbaru seputar Liga Champions."],
+  ["/matches", "Jadwal & Hasil", "Pertandingan yang akan datang dan skor akhir."],
+  ["/stats", "Klasemen", "Menang, seri, kalah, dan poin setiap tim."],
+];
 
 export default function Home() {
   const [news, setNews] = useState([]);
-  const carouselRef = useRef(null);
+  const [error, setError] = useState(null);
 
-  // Fetch berita terbaru
   useEffect(() => {
-    fetch(`${API}/news`, { credentials: "include" })
-      .then((res) => res.json())
-      .then((data) => setNews(data.slice(0, 10))) // Ambil 10 berita
-      .catch((err) => console.error(err));
+    fetch(`${API}/news`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Gagal memuat berita");
+        return res.json();
+      })
+      .then((data) => setNews(data.slice(0, 6)))
+      .catch((err) => setError(err.message));
   }, []);
 
-  // Auto-scroll carousel setiap 3 detik
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    let scrollAmount = 0;
-
-    const interval = setInterval(() => {
-      if (!carousel) return;
-      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
-      scrollAmount += 260; // Sesuaikan dengan lebar kartu
-      if (scrollAmount >= maxScroll) scrollAmount = 0;
-
-      carousel.scrollTo({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [news]);
-
   return (
-    <div className="home">
+    <>
       <Navbar />
 
-      <div className="hero-section">
-        <h1 className="hero-title">Selamat datang di Aplikasi Sepak Bola!</h1>
-        <p className="hero-subtitle">Temukan berita, jadwal pertandingan, dan statistik tim favorit Anda.</p>
-        <button className="cta-button">
-          <Link to="/news" style={{ color: "inherit", textDecoration: "none" }}>
-            Lihat Berita Terbaru
+      <section className="hero">
+        <div className="hero-inner">
+          <h1>Liga Champions dalam satu tempat</h1>
+          <p>Berita, jadwal pertandingan, dan klasemen terbaru.</p>
+          <Link to="/matches" className="button-accent">
+            Lihat jadwal
           </Link>
-        </button>
-      </div>
+        </div>
+      </section>
 
-      {/* Feature Section */}
-      <div className="features">
-        <div className="feature-card">
-          <h3 className="feature-title">Berita Sepak Bola</h3>
-          <p className="feature-description">Dapatkan informasi terkini seputar dunia sepak bola, termasuk berita tim, transfer pemain, dan lainnya.</p>
-          <Link to="/news" className="feature-link">
-            Lihat Berita
-          </Link>
-        </div>
-        <div className="feature-card">
-          <h3 className="feature-title">Jadwal Pertandingan</h3>
-          <p className="feature-description">Cek jadwal pertandingan tim kesayanganmu dan jangan lewatkan pertandingan seru.</p>
-          <Link to="/matches" className="feature-link">
-            Lihat Jadwal
-          </Link>
-        </div>
-        <div className="feature-card">
-          <h3 className="feature-title">Statistik Tim</h3>
-          <p className="feature-description">Lihat statistik tim favoritmu, termasuk jumlah kemenangan, seri, dan kekalahan.</p>
-          <Link to="/stats" className="feature-link">
-            Lihat Statistik
-          </Link>
-        </div>
-      </div>
-
-      {/* Highlight Section */}
-      <div className="highlight-section">
-        <h2 className="highlight-title">Highlight Berita</h2>
-        <div className="highlight-carousel" ref={carouselRef}>
-          {news.map((item) => (
-            <div className="highlight-card" key={item.id}>
-              <div className="highlight-image">
-                <img src={`${SERVER_URL}${item.image_url}`} alt={item.title} />
-              </div>
-              <div className="highlight-info">
-                <small>{new Date(item.published_at).toLocaleDateString()}</small>
-                <h4>{item.title}</h4>
-                <Link to="/news" className="highlight-link">
-                  Baca Selengkapnya
-                </Link>
-              </div>
-            </div>
+      <div className="page">
+        <nav className="shortcuts" aria-label="Pintasan">
+          {SHORTCUTS.map(([to, title, text]) => (
+            <Link key={to} to={to} className="shortcut card">
+              <strong>{title}</strong>
+              <span>{text}</span>
+            </Link>
           ))}
-        </div>
-        <Link to="/news" className="highlight-link">
-          Lihat semua highlight
-        </Link>
+        </nav>
+
+        <h2 className="page-title">Berita terbaru</h2>
+        {error ? <p className="status status-error">{error}</p> : <NewsList items={news} />}
       </div>
-    </div>
+    </>
   );
 }
