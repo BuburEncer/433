@@ -4,11 +4,11 @@ import { API } from "../../api";
 import "./Stats.css";
 
 const COLUMNS = [
-  ["played", "Main"],
-  ["win", "M"],
-  ["draw", "S"],
-  ["loss", "K"],
-  ["points", "Pts"],
+  ["played", "Main", "Main"],
+  ["win", "M", "Menang"],
+  ["draw", "S", "Seri"],
+  ["loss", "K", "Kalah"],
+  ["points", "Pts", "Poin"],
 ];
 
 export default function Stats() {
@@ -33,14 +33,17 @@ export default function Stats() {
   else if (table.length === 0) content = <p className="status">Klasemen belum tersedia.</p>;
   else
     content = (
-      <div className="table-scroll card">
+      // Focusable so keyboard users can scroll the table sideways on phones.
+      <div className="table-scroll card" tabIndex={0} role="region" aria-label="Tabel klasemen">
         <table className="standings">
           <thead>
             <tr>
               <th>#</th>
               <th className="col-team">Tim</th>
-              {COLUMNS.map(([key, label]) => (
-                <th key={key}>{label}</th>
+              {COLUMNS.map(([key, label, full]) => (
+                <th key={key} scope="col">
+                  <abbr title={full}>{label}</abbr>
+                </th>
               ))}
             </tr>
           </thead>
