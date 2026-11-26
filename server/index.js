@@ -38,6 +38,9 @@ app.use(
     saveUninitialized: false,
     store,
     cookie: {
+      httpOnly: true,
+      // Blocks cross-site form posts (CSRF); client and API share the "localhost" site.
+      sameSite: "strict",
       secure: process.env.NODE_ENV === "production",
       maxAge: 1000 * 60 * 60 * 24,
     },
