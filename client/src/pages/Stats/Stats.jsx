@@ -34,55 +34,49 @@ export default function Stats() {
   else if (table.length === 0) content = <p className="status">Klasemen belum tersedia.</p>;
   else
     content = (
-      // Focusable so keyboard users can scroll the table sideways on phones.
-      <div className="table-scroll card" tabIndex={0} role="region" aria-label="Tabel klasemen">
-        <table className="standings">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th className="col-team">Tim</th>
-              {COLUMNS.map(([key, label, full]) => (
-                <th key={key} scope="col">
-                  <abbr title={full}>{label}</abbr>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {table.map((row, i) => {
-              const zone = zoneForRank(i + 1);
-              return (
-                <tr key={row.Team.id}>
-                  <td>
-                    <span className={`rank rank-${zone.key}`} title={zone.label}>
-                      {i + 1}
-                    </span>
-                  </td>
-                  <td className="col-team">
-                    <span className="team-cell">
-                      <img src={row.Team.logo_url} alt="" />
-                      {row.Team.name}
-                    </span>
-                  </td>
-                  {COLUMNS.map(([key]) => (
-                    <td key={key} className={key === "points" ? "col-points" : undefined}>
-                      {row[key]}
+      <>
+        {/* Focusable so keyboard users can scroll the table sideways on phones. */}
+        <div className="table-scroll card" tabIndex={0} role="region" aria-label="Tabel klasemen">
+          <table className="standings">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th className="col-team">Tim</th>
+                {COLUMNS.map(([key, label, full]) => (
+                  <th key={key} scope="col">
+                    <abbr title={full}>{label}</abbr>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {table.map((row, i) => {
+                const zone = zoneForRank(i + 1);
+                return (
+                  <tr key={row.Team.id}>
+                    <td>
+                      <span className={`rank rank-${zone.key}`}>
+                        {i + 1}
+                        <span className="sr-only">, {zone.label}</span>
+                      </span>
                     </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    );
-
-  return (
-    <>
-      <Navbar />
-      <div className="page page-narrow">
-        <h1 className="page-title">Klasemen</h1>
-        {content}
+                    <td className="col-team">
+                      <span className="team-cell">
+                        <img src={row.Team.logo_url} alt="" />
+                        {row.Team.name}
+                      </span>
+                    </td>
+                    {COLUMNS.map(([key]) => (
+                      <td key={key} className={key === "points" ? "col-points" : undefined}>
+                        {row[key]}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
         <ul className="zone-legend">
           {ZONES.map((z) => (
             <li key={z.key}>
@@ -91,6 +85,15 @@ export default function Stats() {
             </li>
           ))}
         </ul>
+      </>
+    );
+
+  return (
+    <>
+      <Navbar />
+      <div className="page page-narrow">
+        <h1 className="page-title">Klasemen</h1>
+        {content}
         <p className="legend">M = menang, S = seri, K = kalah</p>
       </div>
     </>

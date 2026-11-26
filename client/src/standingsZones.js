@@ -6,4 +6,5 @@ export const ZONES = [
   { key: "out", label: "Tersingkir", from: 25, to: Infinity },
 ];
 
+// rank is 1-based (first place = 1).
 export const zoneForRank = (rank) => ZONES.find((z) => rank >= z.from && rank <= z.to);

@@ -33,7 +33,7 @@ Semua warna dan ukuran ditulis sekali sebagai CSS variable di `client/src/index.
 | `--color-zebra` | `#fafbfd` | Baris selang-seling tabel klasemen |
 | `--color-zone-r16` | `#1a7f37` | Nomor peringkat 1–8 (lolos ke 16 besar) |
 | `--color-zone-playoff` | `#b35c00` | Nomor peringkat 9–24 (playoff fase gugur) |
-| `--color-zone-out` | `#c81e3a` | Nomor peringkat 25–36 (tersingkir) |
+| `--color-zone-out` | `#c81e3a` | Nomor peringkat 25 ke bawah (tersingkir) |
 | `--color-link` | `#2536c9` | Link dan tombol sekunder |
 | `--color-danger` | `#c81e3a` | Tombol hapus, pesan error |
 
@@ -72,7 +72,7 @@ Berita terbaru tampil besar: gambar lebar dengan judul 28px di bawahnya. Berita 
 
 ### Klasemen (halaman Stats)
 
-Nomor peringkat diberi kotak warna sesuai zona fase liga UCL: hijau untuk 1–8, oranye untuk 9–24, merah untuk 25–36. Teks putih di atas ketiga warna itu kontrasnya minimal 4.72:1. Di bawah tabel ada keterangan warna, jadi warna bukan satu-satunya penanda. Batas zona dihitung dari posisi di tabel saja, belum memakai aturan tie-break UEFA.
+Nomor peringkat diberi kotak warna sesuai zona fase liga UCL: hijau untuk 1–8, oranye untuk 9–24, merah untuk 25 ke bawah (di halaman tertulis "25+"). Teks putih di atas ketiga warna itu kontrasnya minimal 4.72:1. Di bawah tabel ada keterangan warna, dan setiap nomor punya teks zona tersembunyi untuk pembaca layar, jadi warna bukan satu-satunya penanda. Keterangan hanya tampil bersama tabel. Batas zona dihitung dari posisi di tabel saja. Tim dengan poin dan jumlah menang sama diurutkan berdasarkan nama supaya posisinya tetap; aturan tie-break UEFA (selisih gol) belum dipakai karena DB belum punya kolom gol.
 
 Tabel di dalam kartu. Header tabel berlatar navy dengan teks putih, angka rata kanan, dan baris diberi warna selang-seling yang sangat tipis. Di HP, tabel bisa digeser ke samping di dalam kartunya sendiri, jadi halaman tidak ikut melebar.
 
