@@ -1,72 +1,38 @@
-// src/components/Navbar.jsx
-import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FiMenu, FiX, FiChevronDown } from "react-icons/fi";
 import "./Navbar.css";
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const navRef = useRef(null);
-  const dropdownRef = useRef(null);
+const PUBLIC_LINKS = [
+  ["/", "Home"],
+  ["/matches", "Matches"],
+  ["/news", "Berita"],
+  ["/stats", "Statistik"],
+];
 
-  const toggleMenu = () => setIsOpen((prev) => !prev);
-  const toggleDropdown = (e) => {
-    e.preventDefault();
-    setDropdownOpen((prev) => !prev);
-  };
+const ADMIN_LINKS = [
+  ["/admin/dashboard", "Dashboard Admin"],
+  ["/admin/matches", "Admin Matches"],
+  ["/admin/news", "Admin News"],
+  ["/admin/stats", "Admin Stats"],
+  ["/", "Exit Admin"],
+];
 
-  // Tutup menu/dropdown saat klik di luar
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (navRef.current && !navRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
+export default function Navbar({ admin = false }) {
   return (
-    <nav className="navbar" ref={navRef}>
+    <nav className="navbar">
       <div className="navbarInner">
         <div className="navbarLogo">
-          <img
-            src="/4-2-3-1 Logo.png"
-            alt="Logo 4-2-3-1"
-            className="logoImage"
-          />
-          <div className="navbarText">
-            4-2-3-1
-          </div>
+          <img src="/4-2-3-1 Logo.png" alt="Logo 4-2-3-1" className="logoImage" />
+          <div className="navbarText">4-2-3-1</div>
         </div>
 
-   
-
         <ul className="navbarMenu">
-          <li>
-            <Link to="/" className="navbarLink" onClick={() => setIsOpen(false)}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/matches" className="navbarLink" onClick={() => setIsOpen(false)}>
-              Matches
-            </Link>
-          </li>
-          <li>
-            <Link to="/news" className="navbarLink" onClick={() => setIsOpen(false)}>
-              Berita
-            </Link>
-          </li>
-          <li>
-            <Link to="/stats" className="navbarLink" onClick={() => setIsOpen(false)}>
-              Statistik
-            </Link>
+          {(admin ? ADMIN_LINKS : PUBLIC_LINKS).map(([to, label]) => (
+            <li key={label}>
+              <Link to={to} className="navbarLink">
+                {label}
+              </Link>
             </li>
+          ))}
         </ul>
       </div>
     </nav>

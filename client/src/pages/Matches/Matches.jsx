@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Matches.css";
 import Navbar from "../../components/Navbar";
+import { API } from "../../api";
 
 export default function Matches() {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`${API}/matches`, { credentials: "include" })
@@ -22,7 +22,7 @@ export default function Matches() {
         setError(err.message);
         setLoading(false);
       });
-  }, [API]);
+  }, []);
 
   const scheduled = matches.filter((m) => m.status === "scheduled");
   const finished = matches.filter((m) => m.status === "finished");

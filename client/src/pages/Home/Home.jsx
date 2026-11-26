@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import { API, SERVER_URL } from "../../api";
 import "./Home.css";
 
 export default function Home() {
@@ -9,7 +10,7 @@ export default function Home() {
 
   // Fetch berita terbaru
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/news`, { credentials: "include" })
+    fetch(`${API}/news`, { credentials: "include" })
       .then((res) => res.json())
       .then((data) => setNews(data.slice(0, 10))) // Ambil 10 berita
       .catch((err) => console.error(err));
@@ -82,7 +83,7 @@ export default function Home() {
           {news.map((item) => (
             <div className="highlight-card" key={item.id}>
               <div className="highlight-image">
-                <img src={`${import.meta.env.VITE_API_URL.replace(/\/api$/, "")}${item.image_url}`} alt={item.title} />
+                <img src={`${SERVER_URL}${item.image_url}`} alt={item.title} />
               </div>
               <div className="highlight-info">
                 <small>{new Date(item.published_at).toLocaleDateString()}</small>

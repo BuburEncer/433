@@ -1,11 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import NavbarAdmin from "../../components/NavbarAdmin";
+import Navbar from "../../components/Navbar";
 
 function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <NavbarAdmin />
+      <Navbar admin />
       <div className="container mx-auto px-4 py-8">
         <h2 className="text-3xl font-semibold text-gray-800">
           Admin Dashboard

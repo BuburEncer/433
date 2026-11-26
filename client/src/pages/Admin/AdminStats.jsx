@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import NavbarAdmin from "../../components/NavbarAdmin";
+import Navbar from "../../components/Navbar";
+import { API } from "../../api";
 
 export default function AdminStats() {
   const [stats, setStats] = useState([]);
@@ -24,13 +25,13 @@ export default function AdminStats() {
   });
 
   const fetchStats = async () => {
-    const res = await fetch(import.meta.env.VITE_API_URL + "/standings");
+    const res = await fetch(`${API}/standings`);
     const data = await res.json();
     setStats(data);
   };
 
   const fetchTeams = async () => {
-    const res = await fetch(import.meta.env.VITE_API_URL + "/teams");
+    const res = await fetch(`${API}/teams`);
     const data = await res.json();
     setTeams(data);
   };
@@ -42,7 +43,7 @@ export default function AdminStats() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch(import.meta.env.VITE_API_URL + "/standings", {
+    await fetch(`${API}/standings`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -60,7 +61,7 @@ export default function AdminStats() {
   };
 
   const deleteStat = async (id) => {
-    await fetch(`${import.meta.env.VITE_API_URL}/standings/${id}`, {
+    await fetch(`${API}/standings/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -69,7 +70,7 @@ export default function AdminStats() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <NavbarAdmin />
+      <Navbar admin />
       <div className="container mx-auto p-5">
         <h2 className="text-3xl font-semibold text-center mb-8">
           Admin - Statistik Tim
@@ -191,7 +192,7 @@ export default function AdminStats() {
                         onSubmit={async (e) => {
                           e.preventDefault();
                           await fetch(
-                            `${import.meta.env.VITE_API_URL}/standings/${s.id}`,
+                            `${API}/standings/${s.id}`,
                             {
                               method: "PUT",
                               headers: { "Content-Type": "application/json" },

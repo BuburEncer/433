@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import "./News.css";
 import Navbar from "../../components/Navbar";
+import { API, SERVER_URL } from "../../api";
 
 export default function News() {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`${API}/news`, { credentials: "include" })
@@ -35,7 +35,7 @@ export default function News() {
         <div key={n.id} className="news-card">
           {n.image_url && (
             <img
-              src={`${import.meta.env.VITE_API_URL.replace(/\/api$/, "")}${n.image_url}`}
+              src={`${SERVER_URL}${n.image_url}`}
               alt={n.title}
             />
           )}

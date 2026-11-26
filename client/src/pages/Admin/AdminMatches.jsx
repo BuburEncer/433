@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import NavbarAdmin from "../../components/NavbarAdmin";
+import Navbar from "../../components/Navbar";
+import { API } from "../../api";
 
 export default function AdminMatches() {
   const [matches, setMatches] = useState([]);
@@ -15,7 +16,6 @@ export default function AdminMatches() {
   const [editScores, setEditScores] = useState({});
   const [showEditForm, setShowEditForm] = useState({});
   const [formKey, setFormKey] = useState(Date.now()); // Untuk reset Select
-  const API = import.meta.env.VITE_API_URL;
 
   const teamOptions = teams.map((team) => ({
     value: team.id,
@@ -108,13 +108,12 @@ export default function AdminMatches() {
     fetchMatches();
   };
 
-  const today = new Date().toISOString().slice(0, 16);
   const scheduledMatches = matches.filter((m) => m.status !== "finished");
   const finishedMatches = matches.filter((m) => m.status === "finished");
 
   return (
     <div className="admin-matches bg-gray-100 min-h-screen">
-      <NavbarAdmin />
+      <Navbar admin />
       <div className="container mx-auto p-6">
         <h3 className="text-3xl font-semibold mb-6">Tambah Pertandingan</h3>
 

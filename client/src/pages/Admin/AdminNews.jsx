@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import NavbarAdmin from "../../components/NavbarAdmin";
+import Navbar from "../../components/Navbar";
+import { API, SERVER_URL } from "../../api";
 
 export default function AdminNews() {
   const [news, setNews] = useState([]);
@@ -9,7 +10,6 @@ export default function AdminNews() {
     image: null,
   });
 
-  const API = import.meta.env.VITE_API_URL;
 
   const fetchNews = async () => {
     const res = await fetch(`${API}/news`);
@@ -49,7 +49,7 @@ export default function AdminNews() {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <NavbarAdmin />
+      <Navbar admin />
       <div className="container mx-auto p-6">
         <h2 className="text-3xl font-semibold mb-6">Kelola Berita</h2>
 
@@ -98,7 +98,7 @@ export default function AdminNews() {
             >
               {n.image_url && (
                 <img
-                  src={`${import.meta.env.VITE_API_URL.replace(/\/api$/, "")}${n.image_url}`}
+                  src={`${SERVER_URL}${n.image_url}`}
                   alt={n.title}
                   className="w-full h-48 object-cover rounded-lg"
                 />

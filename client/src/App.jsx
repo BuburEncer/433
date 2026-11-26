@@ -1,6 +1,5 @@
 // src/App.jsx
-import React from "react";
-import { Routes, Route, Navigate, Link } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Matches from "./pages/Matches/Matches";
 import News from "./pages/News/News";
@@ -11,7 +10,7 @@ import AdminMatches from "./pages/Admin/AdminMatches.jsx";
 import AdminNews from "./pages/Admin/AdminNews.jsx";
 import AdminStats from "./pages/Admin/AdminStats.jsx";
 
-import "./App.css"; // Assuming you have some CSS for styling
+import "./App.css";
 
 export default function App() {
   return (
