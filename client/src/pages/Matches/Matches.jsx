@@ -5,8 +5,18 @@ import "./Matches.css";
 
 // "live" matches have a score but are not over yet, so they sit with the upcoming ones.
 const TABS = [
-  { key: "upcoming", label: "Terjadwal", statuses: ["live", "scheduled"], empty: "Belum ada pertandingan terjadwal." },
-  { key: "finished", label: "Selesai", statuses: ["finished"], empty: "Belum ada hasil pertandingan." },
+  {
+    key: "upcoming",
+    label: "Terjadwal",
+    statuses: ["live", "scheduled"],
+    empty: "Belum ada pertandingan terjadwal.",
+  },
+  {
+    key: "finished",
+    label: "Selesai",
+    statuses: ["finished"],
+    empty: "Belum ada hasil pertandingan.",
+  },
 ];
 
 const formatDate = (d) =>
@@ -81,12 +91,13 @@ export default function Matches() {
       <div className="page page-narrow">
         <h1 className="page-title">Jadwal & Hasil</h1>
 
-        <div className="tabs" role="group" aria-label="Status pertandingan">
+        <div className="tabs" role="radiogroup" aria-label="Status pertandingan">
           {TABS.map((t) => (
             <button
               key={t.key}
               type="button"
-              aria-pressed={tab === t.key}
+              role="radio"
+              aria-checked={tab === t.key}
               className="tab"
               onClick={() => setTab(t.key)}
             >

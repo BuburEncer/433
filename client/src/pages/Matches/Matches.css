@@ -15,7 +15,7 @@
   cursor: pointer;
 }
 
-.tab[aria-pressed="true"] {
+.tab[aria-checked="true"] {
   background: var(--color-navy);
   border-color: var(--color-navy);
   color: var(--color-on-navy);
