@@ -13,6 +13,7 @@ const SHORTCUTS = [
 
 export default function Home() {
   const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -22,7 +23,8 @@ export default function Home() {
         return res.json();
       })
       .then((data) => setNews(data.slice(0, 6)))
-      .catch((err) => setError(err.message));
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -50,7 +52,13 @@ export default function Home() {
         </nav>
 
         <h2 className="page-title">Berita terbaru</h2>
-        {error ? <p className="status status-error">{error}</p> : <NewsList items={news} />}
+        {loading ? (
+          <p className="status">Memuat berita…</p>
+        ) : error ? (
+          <p className="status status-error">{error}</p>
+        ) : (
+          <NewsList items={news} headingLevel={3} />
+        )}
       </div>
     </>
   );

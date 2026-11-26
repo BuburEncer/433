@@ -5,7 +5,9 @@ const formatDate = (d) =>
   new Date(d).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
 
 // First item is the lead story; the rest render as a compact list.
-export default function NewsList({ items, showCaption = false }) {
+export default function NewsList({ items, showCaption = false, headingLevel = 2 }) {
+  const LeadHeading = `h${headingLevel}`;
+  const ItemHeading = `h${headingLevel + 1}`;
   if (items.length === 0) return <p className="status">Belum ada berita.</p>;
   const [lead, ...rest] = items;
 
@@ -14,7 +16,7 @@ export default function NewsList({ items, showCaption = false }) {
       <article className="news-lead card">
         {lead.image_url && <img src={`${SERVER_URL}${lead.image_url}`} alt="" />}
         <div className="news-lead-body">
-          <h2>{lead.title}</h2>
+          <LeadHeading className="news-lead-title">{lead.title}</LeadHeading>
           {lead.caption && <p>{lead.caption}</p>}
           <time dateTime={lead.published_at}>{formatDate(lead.published_at)}</time>
         </div>
@@ -26,7 +28,7 @@ export default function NewsList({ items, showCaption = false }) {
             <li key={n.id} className="news-item">
               {n.image_url && <img src={`${SERVER_URL}${n.image_url}`} alt="" />}
               <div>
-                <h3>{n.title}</h3>
+                <ItemHeading className="news-item-title">{n.title}</ItemHeading>
                 {showCaption && n.caption && <p>{n.caption}</p>}
                 <time dateTime={n.published_at}>{formatDate(n.published_at)}</time>
               </div>
