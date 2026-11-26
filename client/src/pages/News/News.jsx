@@ -35,7 +35,7 @@ export default function News() {
         <div key={n.id} className="news-card">
           {n.image_url && (
             <img
-              src={`http://localhost:5000/uploads/${n.image_url}`}
+              src={`${import.meta.env.VITE_API_URL.replace(/\/api$/, "")}${n.image_url}`}
               alt={n.title}
             />
           )}

@@ -98,7 +98,7 @@ export default function AdminNews() {
             >
               {n.image_url && (
                 <img
-                  src={`http://localhost:5000/uploads/${n.image_url}`}
+                  src={`${import.meta.env.VITE_API_URL.replace(/\/api$/, "")}${n.image_url}`}
                   alt={n.title}
                   className="w-full h-48 object-cover rounded-lg"
                 />

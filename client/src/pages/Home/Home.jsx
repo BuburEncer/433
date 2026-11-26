@@ -82,7 +82,7 @@ export default function Home() {
           {news.map((item) => (
             <div className="highlight-card" key={item.id}>
               <div className="highlight-image">
-                <img src={`http://localhost:5000/uploads/${item.image_url}`} alt={item.title} />
+                <img src={`${import.meta.env.VITE_API_URL.replace(/\/api$/, "")}${item.image_url}`} alt={item.title} />
               </div>
               <div className="highlight-info">
                 <small>{new Date(item.published_at).toLocaleDateString()}</small>

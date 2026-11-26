@@ -49,7 +49,7 @@ app.use("/api/admin", authRoutes);
 // sinkronisasi tabel session
 store.sync();
 
-app.use('/uploads', express.static(path.join('public')));
+app.use('/uploads', express.static(path.join('public', 'uploads')));
 
 // 3) Test endpoint
 app.get("/api/hello", (req, res) => {
