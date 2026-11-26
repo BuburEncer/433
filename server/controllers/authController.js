@@ -34,7 +34,7 @@ export const loginAdmin = async (req, res) => {
     });
   } catch (err) {
     console.error("Login error:", err);
-    res.status(500).json({ msg: err.message });
+    res.status(500).json({ msg: "Login gagal, coba lagi nanti" });
   }
 };
 
