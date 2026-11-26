@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { adminFetch } from "../api";
 import "./Navbar.css";
@@ -54,9 +54,9 @@ export default function Navbar({ admin = false }) {
         <ul id="navbar-menu" className={open ? "navbarMenu open" : "navbarMenu"}>
           {(admin ? ADMIN_LINKS : PUBLIC_LINKS).map(([to, label]) => (
             <li key={label}>
-              <Link to={to} className="navbarLink" onClick={() => setOpen(false)}>
+              <NavLink to={to} end className="navbarLink" onClick={() => setOpen(false)}>
                 {label}
-              </Link>
+              </NavLink>
             </li>
           ))}
           {admin && (

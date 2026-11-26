@@ -1,24 +1,15 @@
-:root {
-  --nav-bg: #0033cc;
-  --nav-text: #ffffff;
-  --nav-highlight: #ffc107;
-  --nav-hover: #e0a800;
-}
-
 .navbar {
   position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
   z-index: 1000;
-  background-color: var(--nav-bg);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-navy);
 }
 
 .navbarInner {
-  max-width: 1300px;
+  position: relative;
+  max-width: var(--content-width);
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,78 +19,68 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-left: 20px;
 }
 
 .logoImage {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
 }
 
 .navbarText {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--nav-highlight);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-accent);
 }
 
-/* Desktop menu */
 .navbarMenu {
   list-style: none;
   display: flex;
-  gap: 28px;
+  gap: 24px;
   margin: 0;
   padding: 0;
   align-items: center;
 }
 
 .navbarLink {
-  text-decoration: none;
-  color: var(--nav-text);
-  font-size: 1rem;
-  font-weight: 500;
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.navbarLink::after {
-  content: "";
-  position: absolute;
-  width: 0%;
-  height: 2px;
-  left: 0;
-  bottom: -4px;
-  background-color: var(--nav-highlight);
-  transition: width 0.3s;
+  display: inline-block;
+  padding: 8px 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
 }
 
 .navbarLink:hover {
-  color: var(--nav-highlight);
+  color: var(--color-accent);
 }
 
-.navbarLink:hover::after {
-  width: 100%;
+.navbarLink.active {
+  border-bottom-color: var(--color-accent);
 }
 
 .navbarButton {
   background: none;
   border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
   cursor: pointer;
   font: inherit;
+  font-weight: 600;
 }
 
-/* Hamburger */
 .hamburger {
   display: none;
   background: none;
   border: none;
+  padding: 8px;
   cursor: pointer;
-  color: var(--nav-text);
-  font-size: 1.8rem;
+  color: #ffffff;
+  font-size: 28px;
+  line-height: 0;
 }
 
-/* Responsive: Mobile */
 @media (max-width: 768px) {
   .hamburger {
     display: block;
@@ -107,41 +88,32 @@
 
   .navbarMenu {
     display: none;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    background-color: var(--nav-bg);
     position: absolute;
     top: 100%;
+    left: 0;
     right: 0;
-    width: 220px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 0 0 8px 8px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background-color: var(--color-navy);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
 
   .navbarMenu.open {
     display: flex;
   }
 
-  .navbarMenu li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
   .navbarLink {
     display: block;
-    padding: 14px 20px;
-    color: var(--nav-text);
+    width: 100%;
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 3px solid transparent;
   }
 
-  .navbarLink:hover {
-    background-color: var(--nav-hover);
-    color: var(--nav-bg);
-  }
-}
-
-/* Untuk layar besar */
-@media (min-width: 2000px) {
-  .navbarInner {
-    max-width: 1700px;
+  .navbarLink.active {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--color-accent);
   }
 }
