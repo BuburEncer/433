@@ -1,84 +1,77 @@
-.stats {
-  background-color: #f8fafc;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.page-narrow {
+  max-width: 880px;
 }
 
-.stats h2 {
-  font-size: 2rem;
-  color: #1e293b;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
+.table-scroll {
+  overflow-x: auto;
 }
 
-/* Tabel */
-.stats table {
-  width: 95%;
-  max-width: 1000px;
+.standings {
+  width: 100%;
   border-collapse: collapse;
-  background-color: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  font-variant-numeric: tabular-nums;
 }
 
-.stats thead {
-  background-color: #1e3a8a;
+.standings th,
+.standings td {
+  padding: 12px 16px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.standings thead {
+  background: var(--color-navy);
   color: #ffffff;
+}
+
+.standings th {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.standings tbody tr {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.standings tbody tr:nth-child(even) {
+  background: #fafbfd;
+}
+
+.standings tbody tr:last-child {
+  border-bottom: none;
+}
+
+.standings .col-team {
   text-align: left;
+  width: 100%;
 }
 
-.stats th,
-.stats td {
-  padding: 1rem;
-  font-size: 1rem;
-  text-align: center;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.stats th:first-child,
-.stats td:first-child {
-  text-align: center;
-}
-
-.stats tbody tr:hover {
-  background-color: #f1f5f9;
-  transition: background-color 0.2s ease-in-out;
+.standings .col-points {
+  font-weight: 800;
 }
 
 .team-cell {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  text-align: left;
+  gap: 12px;
+  font-weight: 600;
 }
 
 .team-cell img {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
-  border-radius: 4px;
-  background-color: #f1f5f9;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .stats h2 {
-    font-size: 1.5rem;
-  }
+.legend {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--color-muted);
+}
 
-  .stats table {
-    font-size: 0.9rem;
-  }
-
-  .stats th,
-  .stats td {
-    padding: 0.6rem;
-  }
-
-  .team-cell img {
-    width: 24px;
-    height: 24px;
+@media (max-width: 560px) {
+  .standings th,
+  .standings td {
+    padding: 10px 8px;
   }
 }

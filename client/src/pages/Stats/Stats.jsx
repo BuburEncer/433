@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
-import "./Stats.css";
 import Navbar from "../../components/Navbar";
 import { API } from "../../api";
+import "./Stats.css";
+
+const COLUMNS = [
+  ["played", "Main"],
+  ["win", "M"],
+  ["draw", "S"],
+  ["loss", "K"],
+  ["points", "Pts"],
+];
 
 export default function Stats() {
   const [table, setTable] = useState([]);
@@ -9,68 +17,63 @@ export default function Stats() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${API}/standings`, { credentials: "include" })
+    fetch(`${API}/standings`)
       .then((res) => {
         if (!res.ok) throw new Error("Gagal memuat klasemen");
         return res.json();
       })
-      .then((data) => {
-        setTable(Array.isArray(data) ? data : []);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+      .then((data) => setTable(Array.isArray(data) ? data.filter((row) => row.Team) : []))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <><Navbar /><p>Loading klasemen …</p></>;
-  if (error) return <><Navbar /><p style={{ color: "red" }}>{error}</p></>;
+  let content;
+  if (loading) content = <p className="status">Memuat klasemen…</p>;
+  else if (error) content = <p className="status status-error">{error}</p>;
+  else if (table.length === 0) content = <p className="status">Klasemen belum tersedia.</p>;
+  else
+    content = (
+      <div className="table-scroll card">
+        <table className="standings">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th className="col-team">Tim</th>
+              {COLUMNS.map(([key, label]) => (
+                <th key={key}>{label}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {table.map((row, i) => (
+              <tr key={row.Team.id}>
+                <td>{i + 1}</td>
+                <td className="col-team">
+                  <span className="team-cell">
+                    <img src={row.Team.logo_url} alt="" />
+                    {row.Team.name}
+                  </span>
+                </td>
+                {COLUMNS.map(([key]) => (
+                  <td key={key} className={key === "points" ? "col-points" : undefined}>
+                    {row[key]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
 
   return (
-    <div className="stats">
+    <>
       <Navbar />
-      <h2>Klasemen</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>No.</th>
-            <th>Tim</th>
-            <th>Main</th>
-            <th>Menang</th>
-            <th>Seri</th>
-            <th>Kalah</th>
-            <th>Pts</th>
-          </tr>
-        </thead>
-        <tbody>
-          {table.map((row, i) => {
-            const team = row.Team;
-            // Pastikan Team ada sebelum render
-            if (!team) return null;
-            return (
-              <tr key={team.id}>
-                <td>{i + 1}</td>
-                <td className="team-cell">
-                  <img
-                    src={team.logo_url || "/assets/default.png"}
-                    alt={team.name}
-                    onError={(e) =>
-                      (e.currentTarget.src = "/assets/default.png")
-                    }
-                  />
-                  {team.name}
-                </td>
-                <td>{row.played}</td>
-                <td>{row.win}</td>
-                <td>{row.draw}</td>
-                <td>{row.loss}</td>
-                <td>{row.points}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+      <div className="page page-narrow">
+        <h1 className="page-title">Klasemen</h1>
+        {content}
+        <p className="legend">M = menang, S = seri, K = kalah</p>
+      </div>
+    </>
   );
 }
