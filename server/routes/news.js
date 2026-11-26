@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import requireAdmin from '../middleware/requireAdmin.js';
 import multer from 'multer';
 import path from 'path';
 import { getAllNews, addNews, deleteNews } from '../controllers/newsController.js';
@@ -15,7 +16,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get('/', getAllNews);
-router.post('/', upload.single('image'), addNews);
-router.delete('/:id', deleteNews);
+router.post('/', requireAdmin, upload.single('image'), addNews);
+router.delete('/:id', requireAdmin, deleteNews);
 
 export default router;
