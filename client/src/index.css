@@ -15,6 +15,9 @@
   --color-link: #2536c9;
   --color-danger: #c81e3a;
   --color-zebra: #fafbfd;
+  --color-zone-r16: #1a7f37;
+  --color-zone-playoff: #b35c00;
+  --color-zone-out: #c81e3a;
   --font-sans: "Manrope", system-ui, sans-serif;
   --radius-control: 8px;
   --radius-card: 12px;

@@ -59,6 +59,52 @@
   object-fit: contain;
 }
 
+/* Zone colour sits behind the rank number (white text, all >= 4.5:1) plus a legend, so colour is never the only cue. */
+.rank {
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 4px;
+  border-radius: 6px;
+  color: var(--color-on-navy);
+  font-weight: 800;
+}
+
+.rank-r16 {
+  background: var(--color-zone-r16);
+}
+
+.rank-playoff {
+  background: var(--color-zone-playoff);
+}
+
+.rank-out {
+  background: var(--color-zone-out);
+}
+
+.zone-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 16px 0 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.zone-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zone-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
 .legend {
   margin-top: 12px;
   font-size: 14px;

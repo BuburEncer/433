@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import { API } from "../../api";
+import { ZONES, zoneForRank } from "../../standingsZones";
 import "./Stats.css";
 
 const COLUMNS = [
@@ -48,22 +49,29 @@ export default function Stats() {
             </tr>
           </thead>
           <tbody>
-            {table.map((row, i) => (
-              <tr key={row.Team.id}>
-                <td>{i + 1}</td>
-                <td className="col-team">
-                  <span className="team-cell">
-                    <img src={row.Team.logo_url} alt="" />
-                    {row.Team.name}
-                  </span>
-                </td>
-                {COLUMNS.map(([key]) => (
-                  <td key={key} className={key === "points" ? "col-points" : undefined}>
-                    {row[key]}
+            {table.map((row, i) => {
+              const zone = zoneForRank(i + 1);
+              return (
+                <tr key={row.Team.id}>
+                  <td>
+                    <span className={`rank rank-${zone.key}`} title={zone.label}>
+                      {i + 1}
+                    </span>
                   </td>
-                ))}
-              </tr>
-            ))}
+                  <td className="col-team">
+                    <span className="team-cell">
+                      <img src={row.Team.logo_url} alt="" />
+                      {row.Team.name}
+                    </span>
+                  </td>
+                  {COLUMNS.map(([key]) => (
+                    <td key={key} className={key === "points" ? "col-points" : undefined}>
+                      {row[key]}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -75,6 +83,14 @@ export default function Stats() {
       <div className="page page-narrow">
         <h1 className="page-title">Klasemen</h1>
         {content}
+        <ul className="zone-legend">
+          {ZONES.map((z) => (
+            <li key={z.key}>
+              <span className={`zone-swatch rank-${z.key}`} aria-hidden="true" />
+              {z.label} ({Number.isFinite(z.to) ? `${z.from}–${z.to}` : `${z.from}+`})
+            </li>
+          ))}
+        </ul>
         <p className="legend">M = menang, S = seri, K = kalah</p>
       </div>
     </>
