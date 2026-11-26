@@ -3,20 +3,27 @@ import { Admin } from "../models/index.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+// Accounts created before hashing store plaintext; upgrade them on first successful login.
+export async function checkPassword(admin, password) {
+  if (admin.password.startsWith("$2")) return bcrypt.compare(password, admin.password);
+  if (password !== admin.password) return false;
+  admin.password = await bcrypt.hash(password, 10);
+  await admin.save();
+  return true;
+}
+
 export const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
-  console.log("Body:", req.body); // log input dari frontend
+  if (typeof email !== "string" || typeof password !== "string") {
+    return res.status(400).json({ msg: "Email dan password wajib diisi" });
+  }
 
   try {
     const admin = await Admin.findOne({ where: { email } });
-    console.log("Admin found:", admin); // log admin yang ditemukan
-
-    if (!admin) return res.status(404).json({ msg: "Admin tidak ditemukan" });
-
-    // Cek password biasa tanpa hashing
-    if (password !== admin.password) {
-      return res.status(401).json({ msg: "Password salah" });
+    if (!admin || !(await checkPassword(admin, password))) {
+      return res.status(401).json({ msg: "Email atau password salah" });
     }
+
     
     const token = jwt.sign({ id: admin.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     req.session.token = token;
