@@ -47,7 +47,6 @@ export async function createMatch(req, res, next) {
   }
 }
 
-// Update Match
 export async function updateMatch(req, res, next) {
   try {
     const { home_score, away_score, status } = req.body;
@@ -55,7 +54,6 @@ export async function updateMatch(req, res, next) {
 
     if (!match) return res.status(404).json({ message: 'Match not found' });
 
-    // Update the match details
     match.home_score = home_score;
     match.away_score = away_score;
     match.status = status;
@@ -67,7 +65,6 @@ export async function updateMatch(req, res, next) {
   }
 }
 
-// Delete Match
 export async function deleteMatch(req, res, next) {
   try {
     const match = await Match.findByPk(req.params.id);
@@ -75,7 +72,7 @@ export async function deleteMatch(req, res, next) {
     if (!match) return res.status(404).json({ message: 'Match not found' });
 
     await match.destroy();
-    res.status(204).send();  // Mengembalikan status 204 jika berhasil dihapus
+    res.status(204).send();
   } catch (err) {
     next(err);
   }

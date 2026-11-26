@@ -16,7 +16,7 @@ const Admin = db.define("admin", {
     allowNull: false,
   }
 }, {
-  freezeTableName: true  // ✅ letakkan di sini, sebagai opsi model
+  freezeTableName: true
 });
 
 export default Admin;
