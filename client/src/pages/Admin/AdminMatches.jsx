@@ -252,7 +252,7 @@ export default function AdminMatches() {
                   />
                 </div>
 
-                <div className="flex space-x-4">
+                <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => deleteMatch(m.id)}
                     className="bg-danger text-white p-2 rounded-control hover:bg-danger/90"
@@ -272,7 +272,7 @@ export default function AdminMatches() {
                   )}
 
                   {showEditForm[m.id] && (
-                    <div className="flex space-x-4 mt-4">
+                    <div className="flex flex-wrap gap-2 mt-2 w-full">
                       <input
                         type="number"
                         placeholder="Skor Tuan Rumah"
@@ -286,7 +286,7 @@ export default function AdminMatches() {
                             },
                           })
                         }
-                        className="p-2 border rounded-control border-input-border"
+                        className="w-full sm:w-36 p-2 border rounded-control border-input-border"
                       />
                       <input
                         type="number"
@@ -301,7 +301,7 @@ export default function AdminMatches() {
                             },
                           })
                         }
-                        className="p-2 border rounded-control border-input-border"
+                        className="w-full sm:w-36 p-2 border rounded-control border-input-border"
                       />
                       <button
                         onClick={() => updateMatch(m.id)}
