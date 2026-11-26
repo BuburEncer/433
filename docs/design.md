@@ -61,7 +61,7 @@ Latar navy. Teks logo "4-2-3-1" berwarna cyan, link berwarna putih. Link halaman
 
 Satu pertandingan satu baris di dalam kartu: nama tim kandang rata kanan, logo, skor atau "vs" di tengah, logo, lalu nama tim tandang rata kiri. Tanggal kecil di bawah skor. Baris dipisah garis tipis, bukan kartu terpisah.
 
-Pertandingan Terjadwal dan Selesai dipisah dengan dua tab berbentuk pill. Pemilihan tab cukup disimpan di state halaman.
+Pertandingan Terjadwal dan Selesai dipisah dengan dua tombol pill (`aria-pressed`). Pertandingan berstatus `live` masuk ke Terjadwal dengan label Live dan skornya. Pilihan tombol cukup disimpan di state halaman.
 
 ### Berita (Home dan halaman Berita)
 

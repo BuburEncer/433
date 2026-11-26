@@ -3,9 +3,10 @@ import Navbar from "../../components/Navbar";
 import { API } from "../../api";
 import "./Matches.css";
 
+// "live" matches have a score but are not over yet, so they sit with the upcoming ones.
 const TABS = [
-  { key: "scheduled", label: "Terjadwal", empty: "Belum ada pertandingan terjadwal." },
-  { key: "finished", label: "Selesai", empty: "Belum ada hasil pertandingan." },
+  { key: "upcoming", label: "Terjadwal", statuses: ["live", "scheduled"], empty: "Belum ada pertandingan terjadwal." },
+  { key: "finished", label: "Selesai", statuses: ["finished"], empty: "Belum ada hasil pertandingan." },
 ];
 
 const formatDate = (d) =>
@@ -13,12 +14,13 @@ const formatDate = (d) =>
     weekday: "short",
     day: "numeric",
     month: "short",
+    year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
   });
 
 function MatchRow({ m }) {
-  const finished = m.status === "finished";
+  const hasScore = m.status !== "scheduled";
   return (
     <li className="match-row">
       <span className="team team-home">
@@ -26,8 +28,9 @@ function MatchRow({ m }) {
         <img src={m.HomeTeam.logo_url} alt="" />
       </span>
       <span className="match-center">
-        <span className={finished ? "score" : "vs"}>
-          {finished ? `${m.home_score} - ${m.away_score}` : "vs"}
+        {m.status === "live" && <span className="live-badge">Live</span>}
+        <span className={hasScore ? "score" : "vs"}>
+          {hasScore ? `${m.home_score ?? 0} - ${m.away_score ?? 0}` : "vs"}
         </span>
         <time dateTime={m.match_date}>{formatDate(m.match_date)}</time>
       </span>
@@ -43,7 +46,7 @@ export default function Matches() {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [tab, setTab] = useState("scheduled");
+  const [tab, setTab] = useState("upcoming");
 
   useEffect(() => {
     fetch(`${API}/matches`)
@@ -57,7 +60,7 @@ export default function Matches() {
   }, []);
 
   const activeTab = TABS.find((t) => t.key === tab);
-  const shown = matches.filter((m) => (tab === "finished") === (m.status === "finished"));
+  const shown = matches.filter((m) => activeTab.statuses.includes(m.status));
 
   let content;
   if (loading) content = <p className="status">Memuat jadwal pertandingan…</p>;
@@ -78,13 +81,12 @@ export default function Matches() {
       <div className="page page-narrow">
         <h1 className="page-title">Jadwal & Hasil</h1>
 
-        <div className="tabs" role="tablist" aria-label="Status pertandingan">
+        <div className="tabs" role="group" aria-label="Status pertandingan">
           {TABS.map((t) => (
             <button
               key={t.key}
               type="button"
-              role="tab"
-              aria-selected={tab === t.key}
+              aria-pressed={tab === t.key}
               className="tab"
               onClick={() => setTab(t.key)}
             >

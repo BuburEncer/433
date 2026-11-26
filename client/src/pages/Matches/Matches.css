@@ -15,7 +15,7 @@
   cursor: pointer;
 }
 
-.tab[aria-selected="true"] {
+.tab[aria-pressed="true"] {
   background: var(--color-navy);
   border-color: var(--color-navy);
   color: var(--color-on-navy);
@@ -72,6 +72,16 @@
   font-size: 22px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
+}
+
+.live-badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--color-danger);
+  color: var(--color-on-navy);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .vs {
