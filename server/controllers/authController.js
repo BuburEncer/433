@@ -26,8 +26,12 @@ export const loginAdmin = async (req, res) => {
 
     
     const token = jwt.sign({ id: admin.id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    req.session.token = token;
-    res.json({ msg: "Login berhasil", username: admin.username });
+    // New session ID on login so a pre-login session ID cannot be reused (session fixation).
+    req.session.regenerate((err) => {
+      if (err) return res.status(500).json({ msg: "Login gagal" });
+      req.session.token = token;
+      res.json({ msg: "Login berhasil", username: admin.username });
+    });
   } catch (err) {
     console.error("Login error:", err);
     res.status(500).json({ msg: err.message });

@@ -20,3 +20,21 @@ test("legacy plaintext password is upgraded to hash on success", async () => {
   assert.equal(admin.saved, 1);
   assert.ok(await bcrypt.compare("rahasia", admin.password));
 });
+
+test("login regenerates the session before storing the token", async () => {
+  process.env.JWT_SECRET = "test-secret";
+  const { loginAdmin } = await import("./authController.js");
+  const { Admin } = await import("../models/index.js");
+  const hash = await bcrypt.hash("rahasia", 4);
+  Admin.findOne = async () => ({ id: 3, username: "a", password: hash });
+
+  const calls = [];
+  const session = {
+    regenerate(cb) { calls.push("regenerate"); session.token = undefined; cb(); },
+  };
+  const res = { status() { return this; }, json(body) { calls.push(body.msg); } };
+  await loginAdmin({ body: { email: "a@b.c", password: "rahasia" }, session }, res);
+
+  assert.deepEqual(calls, ["regenerate", "Login berhasil"]);
+  assert.ok(session.token);
+});
