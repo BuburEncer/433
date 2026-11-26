@@ -1,13 +1,17 @@
+import { literal } from "sequelize";
 import { Standing, Team } from "../models/index.js";
+
+// `points` is a VIRTUAL attribute, so sort by the expression it is computed from.
+export const STANDINGS_ORDER = [
+  [literal("win * 3 + draw"), "DESC"],
+  ["win", "DESC"],
+];
 
 export async function getStandings(req, res, next) {
   try {
     const standings = await Standing.findAll({
       include: [{ model: Team, attributes: ["id", "name", "logo_url"] }],
-      order: [
-        ["win", "DESC"],
-        ["points", "DESC"],
-      ],
+      order: STANDINGS_ORDER,
     });
     res.json(standings);
   } catch (err) {
