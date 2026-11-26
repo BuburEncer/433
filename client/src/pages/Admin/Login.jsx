@@ -28,7 +28,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen grid place-items-center bg-navy px-4">
+    <main className="min-h-screen grid place-items-center bg-navy px-4">
       <form onSubmit={login} className="card w-full max-w-sm p-8 space-y-4">
         <h1 className="text-2xl font-extrabold">Login Admin</h1>
         {error && (
@@ -62,6 +62,6 @@ export default function Login() {
           Login
         </button>
       </form>
-    </div>
+    </main>
   );
 }

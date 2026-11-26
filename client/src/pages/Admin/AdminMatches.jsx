@@ -121,7 +121,7 @@ export default function AdminMatches() {
   return (
     <div className="admin-matches bg-bg min-h-screen">
       <Navbar admin />
-      <div className="container mx-auto p-6">
+      <main className="container mx-auto p-6">
         <h3 className="text-3xl font-semibold mb-6">Tambah Pertandingan</h3>
 
         <form
@@ -360,7 +360,7 @@ export default function AdminMatches() {
             </div>
           ))}
         </div>
-      </div>
+      </main>
     </div>
   );
 }

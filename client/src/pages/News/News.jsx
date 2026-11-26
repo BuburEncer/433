@@ -22,7 +22,7 @@ export default function News() {
   return (
     <>
       <Navbar />
-      <div className="page">
+      <main className="page">
         <h1 className="page-title">Berita</h1>
         {loading ? (
           <p className="status">Memuat berita…</p>
@@ -31,7 +31,7 @@ export default function News() {
         ) : (
           <NewsList items={news} showCaption />
         )}
-      </div>
+      </main>
     </>
   );
 }

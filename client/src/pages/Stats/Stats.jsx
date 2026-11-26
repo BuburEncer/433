@@ -91,11 +91,11 @@ export default function Stats() {
   return (
     <>
       <Navbar />
-      <div className="page page-narrow">
+      <main className="page page-narrow">
         <h1 className="page-title">Klasemen</h1>
         {content}
         <p className="legend">M = menang, S = seri, K = kalah</p>
-      </div>
+      </main>
     </>
   );
 }

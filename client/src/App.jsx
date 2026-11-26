@@ -10,22 +10,21 @@ import AdminMatches from "./pages/Admin/AdminMatches.jsx";
 import AdminNews from "./pages/Admin/AdminNews.jsx";
 import AdminStats from "./pages/Admin/AdminStats.jsx";
 
-
 export default function App() {
   return (
-    <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/matches" element={<Matches />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/stats" element={<Stats />} />
-          <Route path="/admin" element={<Login />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/matches" element={<AdminMatches />} />
-          <Route path="/admin/news" element={<AdminNews />} />
-          <Route path="/admin/stats" element={<AdminStats />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-    </main>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/matches" element={<Matches />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/stats" element={<Stats />} />
+        <Route path="/admin" element={<Login />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/matches" element={<AdminMatches />} />
+        <Route path="/admin/news" element={<AdminNews />} />
+        <Route path="/admin/stats" element={<AdminStats />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   );
 }

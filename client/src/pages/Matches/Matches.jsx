@@ -88,7 +88,7 @@ export default function Matches() {
   return (
     <>
       <Navbar />
-      <div className="page page-narrow">
+      <main className="page page-narrow">
         <h1 className="page-title">Jadwal & Hasil</h1>
 
         <div className="tabs" role="radiogroup" aria-label="Status pertandingan">
@@ -107,7 +107,7 @@ export default function Matches() {
         </div>
 
         {content}
-      </div>
+      </main>
     </>
   );
 }

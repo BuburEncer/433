@@ -52,7 +52,7 @@ export default function AdminNews() {
   return (
     <div className="bg-bg min-h-screen">
       <Navbar admin />
-      <div className="container mx-auto p-6">
+      <main className="container mx-auto p-6">
         <h2 className="text-3xl font-semibold mb-6">Kelola Berita</h2>
 
         <form
@@ -117,7 +117,7 @@ export default function AdminNews() {
             </li>
           ))}
         </ul>
-      </div>
+      </main>
     </div>
   );
 }

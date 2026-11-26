@@ -76,7 +76,7 @@ export default function AdminStats() {
   return (
     <div className="min-h-screen bg-bg">
       <Navbar admin />
-      <div className="container mx-auto p-5">
+      <main className="container mx-auto p-5">
         <h2 className="text-3xl font-semibold text-center mb-8">
           Admin - Statistik Tim
         </h2>
@@ -310,7 +310,7 @@ export default function AdminStats() {
             </p>
           )}
         </div>
-      </div>
+      </main>
     </div>
   );
 }

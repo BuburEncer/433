@@ -5,7 +5,7 @@ function AdminDashboard() {
   return (
     <div className="min-h-screen bg-bg">
       <Navbar admin />
-      <div className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8">
         <h2 className="text-3xl font-semibold text-text">
           Admin Dashboard
         </h2>
@@ -47,7 +47,7 @@ function AdminDashboard() {
             </Link>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

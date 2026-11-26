@@ -31,35 +31,37 @@ export default function Home() {
     <>
       <Navbar />
 
-      <section className="hero">
-        <div className="hero-inner">
-          <h1>Liga Champions dalam satu tempat</h1>
-          <p>Berita, jadwal pertandingan, dan klasemen terbaru.</p>
-          <Link to="/matches" className="button-accent">
-            Lihat jadwal
-          </Link>
-        </div>
-      </section>
-
-      <div className="page">
-        <nav className="shortcuts" aria-label="Pintasan">
-          {SHORTCUTS.map(([to, title, text]) => (
-            <Link key={to} to={to} className="shortcut card">
-              <strong>{title}</strong>
-              <span>{text}</span>
+      <main>
+        <section className="hero">
+          <div className="hero-inner">
+            <h1>Liga Champions dalam satu tempat</h1>
+            <p>Berita, jadwal pertandingan, dan klasemen terbaru.</p>
+            <Link to="/matches" className="button-accent">
+              Lihat jadwal
             </Link>
-          ))}
-        </nav>
+          </div>
+        </section>
 
-        <h2 className="page-title">Berita terbaru</h2>
-        {loading ? (
-          <p className="status">Memuat berita…</p>
-        ) : error ? (
-          <p className="status status-error">{error}</p>
-        ) : (
-          <NewsList items={news} headingLevel={3} />
-        )}
-      </div>
+        <div className="page">
+          <nav className="shortcuts" aria-label="Pintasan">
+            {SHORTCUTS.map(([to, title, text]) => (
+              <Link key={to} to={to} className="shortcut card">
+                <strong>{title}</strong>
+                <span>{text}</span>
+              </Link>
+            ))}
+          </nav>
+
+          <h2 className="page-title">Berita terbaru</h2>
+          {loading ? (
+            <p className="status">Memuat berita…</p>
+          ) : error ? (
+            <p className="status status-error">{error}</p>
+          ) : (
+            <NewsList items={news} headingLevel={3} />
+          )}
+        </div>
+      </main>
     </>
   );
 }
